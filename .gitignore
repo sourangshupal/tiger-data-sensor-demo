@@ -1,0 +1,6 @@
+.env
+.venv/
+data.csv
+sensors.csv
+__pycache__/
+.ipynb_checkpoints/
