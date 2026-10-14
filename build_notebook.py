@@ -340,9 +340,12 @@ def as_service_list(data):
     \"\"\"Tiger CLI may return a service object, or a list of them — normalize to a list.\"\"\"
     return data if isinstance(data, list) else [data]
 
-svc = tiger_json([\"service\", \"get\", \"-o\", \"json\"])
+# resolve the main service from the full list by matching the host in our
+# connection string (the CLI "default service" can change — e.g. forking makes
+# the fork the default — so never rely on `service get` here)
 host = DB_URL.split(\"@\")[1].split(\":\")[0]
-MAIN_SERVICE_ID = next(s[\"service_id\"] for s in as_service_list(svc) if s.get(\"host\") == host)
+services = as_service_list(tiger_json([\"service\", \"list\", \"-o\", \"json\"]))
+MAIN_SERVICE_ID = next(s[\"service_id\"] for s in services if s.get(\"host\") == host)
 
 # delete a stale fork from a previous run, then fork fresh
 for s in as_service_list(tiger_json([\"service\", \"list\", \"-o\", \"json\"])):
