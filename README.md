@@ -47,7 +47,6 @@ note that free-tier Tiger Cloud accounts are limited to 2 services.
 | File | Purpose |
 |---|---|
 | `tiger-data-demo.ipynb` | The demo notebook (Markdown-narrated, step by step) |
-| `build_notebook.py` | Regenerates the notebook from source |
 | `schema.sql` | Sensors table, `sensor_data` hypertable, hourly continuous aggregate |
 | `generate_sensor_data.sql` | Pure-SQL data generator (writes `data.csv` / `sensors.csv`) |
 | `hybrid_search.py` | CLI helper for the hybrid-search corpus (load / embed / search) |
